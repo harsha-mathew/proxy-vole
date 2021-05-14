@@ -45,6 +45,7 @@ class FirefoxSettingParser {
 	public Properties parseSettings(FirefoxProfileSource source) throws IOException {
 		// Search settings folder
 		File profileFolder = null;
+		File profileFolderForDefaultRelease = null;
 
 		// Read profiles.ini
 		File profilesIniFile = source.getProfilesIni();
@@ -57,16 +58,27 @@ class FirefoxSettingParser {
 						        entry.getValue().get("Path"));
 					}
 				}
+				if ("default-release".equals(entry.getValue().get("Name"))) {
+					if ("1".equals(entry.getValue().get("IsRelative"))) {
+						profileFolderForDefaultRelease = new File(profilesIniFile.getParentFile().getAbsolutePath(),
+								entry.getValue().get("Path"));
+					}
+				}
 			}
 		}
 		if (profileFolder != null) {
 			Logger.log(getClass(), LogLevel.DEBUG, "Firefox settings folder is {0}", profileFolder);
+		} else if (profileFolderForDefaultRelease != null) {
+			Logger.log(getClass(), LogLevel.DEBUG, "Firefox settings folder is {0}", profileFolderForDefaultRelease);
 		} else {
 			Logger.log(getClass(), LogLevel.DEBUG, "Firefox settings folder not found!");
 		}
 
 		// Read settings from file
 		File settingsFile = new File(profileFolder, "prefs.js");
+		if(!settingsFile.exists()) {
+			settingsFile = new File(profileFolderForDefaultRelease, "prefs.js");
+		}
 
 		BufferedReader fin = new BufferedReader(new InputStreamReader(new FileInputStream(settingsFile)));
 
