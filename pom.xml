@@ -20,7 +20,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <downloadSources>true</downloadSources>
     <downloadJavadocs>true</downloadJavadocs>
-    <java.version>1.6</java.version>
+    <java.version>11</java.version>
   </properties>
 
   <scm>
@@ -97,7 +97,7 @@
       <dependency>
         <groupId>org.javadelight</groupId>
         <artifactId>delight-nashorn-sandbox</artifactId>
-        <version>0.1.14</version>
+        <version>0.1.16</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
