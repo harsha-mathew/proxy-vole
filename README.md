@@ -1,3 +1,8 @@
+# Notice!
+This is a temporary fork to add support for Java 11, an updated JNA `Pointer.SIZE` issue, and a Firefox browser proxy issue.
+
+----
+
 # proxy-vole
 
 Proxy Vole is a Java library to auto detect the platform network proxy settings.  
